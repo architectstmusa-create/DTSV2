@@ -1,0 +1,1693 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>DT Stream</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+>
+
+<style>
+
+:root {
+    --black: #050505;
+    --dark: #101010;
+    --gold: #d4af37;
+    --white: #f4f1ea;
+    --grey: #8b8b8b;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--dark);
+    color: white;
+    font-family: "Sora", sans-serif;
+    overflow-x: hidden;
+}
+
+/* ================= NAVIGATION ================= */
+
+.nav-band {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 92px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 5%;
+
+    background: rgba(5, 5, 5, 0.97);
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+    z-index: 1000;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+
+    margin-right: 60px;
+
+    text-decoration: none;
+
+    line-height: 0;
+}
+
+.logo img {
+    width: 150px;
+    height: auto;
+
+    display: block;
+
+    object-fit: contain;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+
+    gap: 38px;
+}
+
+.nav-link {
+    color: #9d9d9d;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    transition: 0.3s;
+}
+
+.nav-link:hover {
+    color: white;
+}
+
+.nav-link.active {
+    color: white;
+
+    font-weight: 700;
+}
+
+.nav-link.active::after {
+    content: "";
+
+    display: block;
+
+    width: 20px;
+    height: 2px;
+
+    margin-top: 8px;
+
+    background: var(--gold);
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+
+    gap: 28px;
+
+    margin-left: auto;
+}
+
+.search-button {
+    font-size: 18px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.search-button:hover {
+    color: var(--gold);
+}
+
+.profile-link {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 13px;
+}
+
+.profile-avatar {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 5px;
+
+    background: #B5121B;
+
+    font-weight: 800;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+    position: relative;
+
+    height: 86vh;
+    min-height: 650px;
+
+    overflow: hidden;
+
+    background: #050505;
+}
+
+.hero-video {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    opacity: 0.75;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to right,
+            rgba(0, 0, 0, 0.98) 0%,
+            rgba(0, 0, 0, 0.75) 28%,
+            rgba(0, 0, 0, 0.15) 70%,
+            rgba(0, 0, 0, 0.55) 100%
+        ),
+        linear-gradient(
+            to top,
+            var(--dark) 0%,
+            transparent 35%
+        );
+}
+
+.hero-content {
+    position: absolute;
+
+    left: 5%;
+    bottom: 14%;
+
+    z-index: 5;
+
+    max-width: 600px;
+}
+
+.hero-label {
+    color: var(--gold);
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-size: clamp(58px, 8vw, 105px);
+
+    line-height: 0.88;
+
+    letter-spacing: -7px;
+
+    margin-bottom: 25px;
+}
+
+.hero h1 span {
+    color: var(--gold);
+}
+
+.hero-meta {
+    color: #cfcfcf;
+
+    font-size: 12px;
+
+    margin-bottom: 20px;
+}
+
+.hero-description {
+    max-width: 490px;
+
+    color: #d0d0d0;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+
+    margin-bottom: 30px;
+}
+
+.hero-buttons {
+    display: flex;
+
+    gap: 12px;
+}
+
+.watch-button,
+.info-button {
+    padding: 15px 26px;
+
+    border: none;
+    border-radius: 4px;
+
+    font-family: "Sora", sans-serif;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.watch-button {
+    background: var(--white);
+
+    color: black;
+}
+
+.watch-button:hover {
+    background: var(--gold);
+
+    transform: translateY(-2px);
+}
+
+.info-button {
+    background: rgba(255, 255, 255, 0.17);
+
+    color: white;
+}
+
+.info-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+
+    transform: translateY(-2px);
+}
+
+/* ================= SOUND ================= */
+
+.sound-button {
+    position: absolute;
+
+    right: 5%;
+    bottom: 14%;
+
+    z-index: 10;
+
+    width: 45px;
+    height: 45px;
+
+    border: 1px solid rgba(255, 255, 255, 0.5);
+
+    border-radius: 50%;
+
+    background: rgba(0, 0, 0, 0.4);
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 17px;
+}
+
+/* ================= MAIN ================= */
+
+main {
+    position: relative;
+
+    z-index: 20;
+
+    margin-top: -20px;
+}
+
+/* ================= SECTIONS ================= */
+
+.section {
+    padding: 65px 5% 35px;
+}
+
+.section-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+
+    margin-bottom: 28px;
+}
+
+.section-title {
+    font-size: 32px;
+
+    letter-spacing: -1px;
+}
+
+.section-subtitle {
+    color: var(--grey);
+
+    font-size: 11px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 2px;
+}
+
+/* ================= ROW ================= */
+
+.content-row {
+    display: flex;
+
+    gap: 24px;
+
+    overflow-x: auto;
+
+    padding: 10px 0 35px;
+}
+
+.content-row::-webkit-scrollbar {
+    display: none;
+}
+
+/* ================= CARDS ================= */
+
+.card {
+    min-width: 420px;
+    height: 250px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    transition: 0.4s;
+
+    background: #222;
+
+    text-decoration: none;
+
+    color: white;
+
+    display: block;
+}
+
+.card:hover {
+    transform: scale(1.04);
+
+    z-index: 5;
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition: transform 0.5s ease;
+}
+
+.card:hover img {
+    transform: scale(1.06);
+}
+
+.card::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.95),
+            rgba(0, 0, 0, 0.05) 75%
+        );
+
+    pointer-events: none;
+}
+
+.card-content {
+    position: absolute;
+
+    left: 30px;
+    bottom: 25px;
+
+    z-index: 2;
+}
+
+.card-title {
+    font-size: 23px;
+
+    font-weight: 700;
+
+    letter-spacing: -0.5px;
+}
+
+.card-category {
+    color: #c9c9c9;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+    margin-top: 8px;
+}
+
+/* ================= PROGRESS ================= */
+
+.progress-bar {
+    position: absolute;
+
+    bottom: 0;
+    left: 0;
+
+    height: 5px;
+
+    background: var(--gold);
+
+    z-index: 5;
+}
+
+/* ================= FEATURE BAND ================= */
+
+.feature-band {
+    margin: 40px 5% 25px;
+
+    min-height: 300px;
+
+    padding: 50px;
+
+    display: flex;
+    align-items: center;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            110deg,
+            #181818,
+            #2b2418
+        );
+}
+
+.feature-band::after {
+    content: "";
+
+    position: absolute;
+
+    right: -150px;
+    top: -180px;
+
+    width: 620px;
+    height: 620px;
+
+    border: 1px solid rgba(212, 175, 55, 0.4);
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 0 35px rgba(212, 175, 55, 0.05),
+        0 0 0 70px rgba(212, 175, 55, 0.03);
+}
+
+.feature-content {
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 600px;
+}
+
+.feature-label {
+    color: var(--gold);
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 15px;
+}
+
+.feature-band h2 {
+    font-size: 44px;
+
+    letter-spacing: -1px;
+
+    margin-bottom: 15px;
+}
+
+.feature-band p {
+    color: #aaa;
+
+    font-size: 14px;
+
+    line-height: 1.8;
+}
+
+/* ================= SEARCH ================= */
+
+.search-overlay {
+    position: fixed;
+
+    top: 92px;
+    right: 5%;
+
+    width: 360px;
+
+    padding: 20px;
+
+    background: #181818;
+
+    border: 1px solid #333;
+
+    z-index: 2000;
+
+    display: none;
+}
+
+.search-overlay input {
+    width: 100%;
+
+    padding: 14px;
+
+    border: 1px solid #444;
+
+    background: #252525;
+
+    color: white;
+
+    outline: none;
+
+    font-family: "Sora", sans-serif;
+}
+
+.search-result {
+    padding: 14px 0;
+
+    border-bottom: 1px solid #333;
+
+    color: #ccc;
+
+    font-size: 13px;
+
+    cursor: pointer;
+}
+
+.search-result:hover {
+    color: var(--gold);
+}
+
+/* ================= MODAL ================= */
+
+.modal {
+    position: fixed;
+
+    inset: 0;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(0, 0, 0, 0.9);
+
+    z-index: 3000;
+}
+
+.modal-content {
+    width: min(700px, 100%);
+
+    position: relative;
+
+    background: #151515;
+
+    border-radius: 8px;
+}
+
+.close-modal {
+    position: absolute;
+
+    top: 15px;
+    right: 20px;
+
+    font-size: 28px;
+
+    cursor: pointer;
+}
+
+.info-content {
+    padding: 55px 45px;
+}
+
+.info-content h2 {
+    font-size: 36px;
+
+    margin-bottom: 20px;
+}
+
+.info-content p {
+    color: #aaa;
+
+    line-height: 1.8;
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+    padding: 70px 5% 35px;
+
+    color: #555;
+
+    font-size: 11px;
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 700px) {
+
+    .nav-band {
+        height: 76px;
+
+        padding: 0 20px;
+    }
+
+    .logo {
+        margin-right: 0;
+    }
+
+    .logo img {
+        width: 135px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .profile-link span {
+        display: none;
+    }
+
+    .hero {
+        min-height: 620px;
+    }
+
+    .hero-content {
+        left: 25px;
+        right: 25px;
+
+        bottom: 13%;
+    }
+
+    .hero h1 {
+        letter-spacing: -4px;
+    }
+
+    .hero-description {
+        font-size: 13px;
+    }
+
+    .sound-button {
+        right: 25px;
+        bottom: 8%;
+    }
+
+    .section {
+        padding: 45px 20px 25px;
+    }
+
+    .section-heading {
+        display: block;
+    }
+
+    .section-title {
+        font-size: 27px;
+
+        margin-bottom: 8px;
+    }
+
+    .card {
+        min-width: 290px;
+        height: 185px;
+    }
+
+    .card-title {
+        font-size: 18px;
+    }
+
+    .feature-band {
+        margin: 30px 20px;
+
+        padding: 35px 25px;
+    }
+
+    .feature-band h2 {
+        font-size: 32px;
+    }
+
+    .search-overlay {
+        left: 20px;
+        right: 20px;
+
+        width: auto;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- ================= NAVIGATION ================= -->
+
+<nav class="nav-band">
+
+    <a
+        href="index.html"
+        class="logo"
+    >
+
+        <img
+            src="DT Streamdud.png"
+            alt="DT Stream Logo"
+        >
+
+    </a>
+
+    <div class="nav-links">
+
+        <a
+            href="#top"
+            class="nav-link active"
+        >
+            Home
+        </a>
+
+        <a
+            href="#movies"
+            class="nav-link"
+        >
+            Movies
+        </a>
+
+        <a
+            href="#series"
+            class="nav-link"
+        >
+            Series
+        </a>
+
+        <a
+            href="#my-list"
+            class="nav-link"
+        >
+            My List
+        </a>
+
+    </div>
+
+    <div class="nav-right">
+
+        <div
+            class="search-button"
+            onclick="toggleSearch()"
+        >
+            🔍
+        </div>
+
+        <a
+            href="profiles.html"
+            class="profile-link"
+        >
+
+            <div
+                class="profile-avatar"
+                id="profileInitial"
+            ></div>
+
+            <span id="profileName"></span>
+
+        </a>
+
+    </div>
+
+</nav>
+
+<!-- ================= SEARCH ================= -->
+
+<div
+    class="search-overlay"
+    id="searchOverlay"
+>
+
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="Search DT Stream..."
+        onkeyup="searchShows()"
+    >
+
+    <div id="searchResults">
+
+        <div class="search-result">
+            Start typing to search
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================= HERO ================= -->
+
+<section
+    class="hero"
+    id="top"
+>
+
+    <video
+        class="hero-video"
+        id="heroVideo"
+        autoplay
+        muted
+        loop
+        playsinline
+    >
+
+        <source
+            src="The Minos Paradox (2025).mp4"
+            type="video/mp4"
+        >
+
+    </video>
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+
+        <div class="hero-label">
+            DT STREAM ORIGINAL
+        </div>
+
+        <h1>
+            The Minos<br>
+            <span>Paradox.</span>
+        </h1>
+
+        <div class="hero-meta">
+            2025 &nbsp; • &nbsp; Movie &nbsp; • &nbsp; 2h 04m
+        </div>
+
+        <p class="hero-description">
+
+            When the future of a city begins to collapse,
+            one young man must confront the past that
+            shaped his world.
+
+        </p>
+
+        <div class="hero-buttons">
+
+            <a
+                href="watch.html"
+                class="watch-button"
+            >
+                ▶ Watch Now
+            </a>
+
+            <button
+                class="info-button"
+                onclick="openInfo()"
+            >
+                ⓘ More Info
+            </button>
+
+        </div>
+
+    </div>
+
+    <button
+        class="sound-button"
+        id="soundButton"
+        onclick="toggleSound()"
+    >
+        🔇
+    </button>
+
+</section>
+
+<!-- ================= MAIN ================= -->
+
+<main>
+
+    <!-- CONTINUE WATCHING -->
+
+    <section class="section">
+
+        <div class="section-heading">
+
+            <h2
+                class="section-title"
+                id="continueTitle"
+            >
+                Continue Watching
+            </h2>
+
+            <span class="section-subtitle">
+                Your viewing
+            </span>
+
+        </div>
+
+        <div class="content-row">
+
+            <a
+                href="student-accomplice.html"
+                class="card searchable"
+                data-title="Student Accomplice"
+            >
+
+                <img
+                    src="Studentaccompliceimage.png"
+                    alt="Student Accomplice"
+                >
+
+                <div class="card-content">
+
+                    <div class="card-title">
+                        Student Accomplice
+                    </div>
+
+                    <div class="card-category">
+                        Movie
+                    </div>
+
+                </div>
+
+                <div
+                    class="progress-bar"
+                    style="width: 40%;"
+                ></div>
+
+            </a>
+
+            <a
+                href="taxi.html"
+                class="card searchable"
+                data-title="Taxi"
+            >
+
+                <img
+                    src="Taxi.jpg"
+                    alt="Taxi"
+                >
+
+                <div class="card-content">
+
+                    <div class="card-title">
+                        Taxi
+                    </div>
+
+                    <div class="card-category">
+                        Short Film
+                    </div>
+
+                </div>
+
+                <div
+                    class="progress-bar"
+                    style="width: 80%;"
+                ></div>
+
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- POPULAR -->
+
+    <section class="section">
+
+        <div class="section-heading">
+
+            <h2 class="section-title">
+                Popular Right Now
+            </h2>
+
+            <span class="section-subtitle">
+                DT Stream
+            </span>
+
+        </div>
+
+        <div class="content-row">
+
+            <a
+                href="timepiece.html"
+                class="card searchable"
+                data-title="Timepiece"
+            >
+
+                <img
+                    src="timepiece.jpg"
+                    alt="Timepiece"
+                >
+
+                <div class="card-content">
+
+                    <div class="card-title">
+                        Timepiece
+                    </div>
+
+                    <div class="card-category">
+                        Movie
+                    </div>
+
+                </div>
+
+            </a>
+
+            <a
+                href="rasa-hope.html"
+                class="card searchable"
+                data-title="Rasa Hope"
+            >
+
+                <img
+                    src="Rasa Hope.jpg"
+                    alt="Rasa Hope"
+                >
+
+                <div class="card-content">
+
+                    <div class="card-title">
+                        Rasa Hope
+                    </div>
+
+                    <div class="card-category">
+                        Movie
+                    </div>
+
+                </div>
+
+            </a>
+
+            <a
+                href="hair-love.html"
+                class="card searchable"
+                data-title="Hair Love"
+            >
+
+                <img
+                    src="Hair Love.jpg"
+                    alt="Hair Love"
+                >
+
+                <div class="card-content">
+
+                    <div class="card-title">
+                        Hair Love
+                    </div>
+
+                    <div class="card-category">
+                        Movie
+                    </div>
+
+                </div>
+
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- FEATURE -->
+
+    <section class="feature-band">
+
+        <div class="feature-content">
+
+            <div class="feature-label">
+                THE DT STREAM COLLECTION
+            </div>
+
+            <h2>
+                Stories from home.
+            </h2>
+
+            <p>
+
+                A growing collection of films, series and
+                documentaries from Zimbabwe and across
+                Southern Africa.
+
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- MOVIES -->
+
+    <section
+        class="section"
+        id="movies"
+    >
+
+        <div class="section-heading">
+
+            <h2 class="section-title">
+                Movies
+            </h2>
+
+            <span class="section-subtitle">
+                Explore films
+            </span>
+
+        </div>
+
+        <div class="content-row">
+
+            <a
+                href="timepiece.html"
+                class="card searchable"
+                data-title="Timepiece"
+            >
+
+                <img
+                    src="timepiece.jpg"
+                    alt="Timepiece"
+                >
+
+                <div class="card-content">
+
+                    <div class="card-title">
+                        Timepiece
+                    </div>
+
+                    <div class="card-category">
+                        Movie
+                    </div>
+
+                </div>
+
+            </a>
+
+            <a
+                href="rasa-hope.html"
+                class="card searchable"
+                data-title="Rasa Hope"
+            >
+
+                <img
+                    src="Rasa Hope.jpg"
+                    alt="Rasa Hope"
+                >
+
+                <div class="card-content">
+
+                    <div class="card-title">
+                        Rasa Hope
+                    </div>
+
+                    <div class="card-category">
+                        Movie
+                    </div>
+
+                </div>
+
+            </a>
+
+            <a
+                href="hair-love.html"
+                class="card searchable"
+                data-title="Hair Love"
+            >
+
+                <img
+                    src="Hair Love.jpg"
+                    alt="Hair Love"
+                >
+
+                <div class="card-content">
+
+                    <div class="card-title">
+                        Hair Love
+                    </div>
+
+                    <div class="card-category">
+                        Movie
+                    </div>
+
+                </div>
+
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- SERIES -->
+
+    <section
+        class="section"
+        id="series"
+    >
+
+        <div class="section-heading">
+
+            <h2 class="section-title">
+                Series
+            </h2>
+
+            <span class="section-subtitle">
+                Watch something new
+            </span>
+
+        </div>
+
+        <div class="content-row">
+
+            <a
+                href="kapfupi-reloaded.html"
+                class="card searchable"
+                data-title="Kapfupi Reloaded"
+            >
+
+                <img
+                    src="Kapfupi Reloaded.jpg"
+                    alt="Kapfupi Reloaded"
+                >
+
+                <div class="card-content">
+
+                    <div class="card-title">
+                        Kapfupi Reloaded
+                    </div>
+
+                    <div class="card-category">
+                        Series
+                    </div>
+
+                </div>
+
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- MY LIST -->
+
+    <section
+        class="section"
+        id="my-list"
+    >
+
+        <div class="section-heading">
+
+            <h2 class="section-title">
+                My List
+            </h2>
+
+            <span class="section-subtitle">
+                Saved for later
+            </span>
+
+        </div>
+
+        <div class="content-row">
+
+            <a
+                href="rasa-hope.html"
+                class="card searchable"
+                data-title="Rasa Hope"
+            >
+
+                <img
+                    src="Rasa Hope.jpg"
+                    alt="Rasa Hope"
+                >
+
+                <div class="card-content">
+
+                    <div class="card-title">
+                        Rasa Hope
+                    </div>
+
+                    <div class="card-category">
+                        Movie
+                    </div>
+
+                </div>
+
+            </a>
+
+            <a
+                href="taxi.html"
+                class="card searchable"
+                data-title="Taxi"
+            >
+
+                <img
+                    src="Taxi.jpg"
+                    alt="Taxi"
+                >
+
+                <div class="card-content">
+
+                    <div class="card-title">
+                        Taxi
+                    </div>
+
+                    <div class="card-category">
+                        Short Film
+                    </div>
+
+                </div>
+
+            </a>
+
+        </div>
+
+    </section>
+
+</main>
+
+<!-- ================= MODAL ================= -->
+
+<div
+    class="modal"
+    id="infoModal"
+>
+
+    <div class="modal-content">
+
+        <div
+            class="close-modal"
+            onclick="closeInfo()"
+        >
+            ×
+        </div>
+
+        <div class="info-content">
+
+            <h2 id="infoTitle">
+                The Minos Paradox
+            </h2>
+
+            <p id="infoText">
+                A DT Stream feature film.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+
+    © 2026 DT Stream — A Doar Tanar Company
+
+</footer>
+
+<script>
+
+/* ================= PROFILE ================= */
+
+function loadProfile() {
+
+    const storedProfile =
+        JSON.parse(
+            localStorage.getItem("dtActiveProfile")
+        );
+
+    const name =
+        storedProfile && storedProfile.name
+            ? storedProfile.name
+            : "Hannah";
+
+    const colour =
+        storedProfile && storedProfile.colour
+            ? storedProfile.colour
+            : "#B5121B";
+
+    document
+        .getElementById("profileInitial")
+        .textContent =
+        name.trim().charAt(0).toUpperCase();
+
+    document
+        .getElementById("profileInitial")
+        .style.background =
+        colour;
+
+    document
+        .getElementById("profileName")
+        .textContent =
+        name;
+
+    document
+        .getElementById("continueTitle")
+        .textContent =
+        "Continue Watching for " + name;
+
+}
+
+loadProfile();
+
+
+/* ================= VIDEO SOUND ================= */
+
+function toggleSound() {
+
+    const video =
+        document.getElementById("heroVideo");
+
+    const button =
+        document.getElementById("soundButton");
+
+    if (video.muted) {
+
+        video.muted = false;
+
+        button.textContent = "🔊";
+
+    } else {
+
+        video.muted = true;
+
+        button.textContent = "🔇";
+
+    }
+
+}
+
+
+/* ================= SEARCH ================= */
+
+function toggleSearch() {
+
+    const search =
+        document.getElementById("searchOverlay");
+
+    if (search.style.display === "block") {
+
+        search.style.display = "none";
+
+    } else {
+
+        search.style.display = "block";
+
+        document
+            .getElementById("searchInput")
+            .focus();
+
+    }
+
+}
+
+function searchShows() {
+
+    const input =
+        document
+            .getElementById("searchInput")
+            .value
+            .toLowerCase()
+            .trim();
+
+    const results =
+        document.getElementById("searchResults");
+
+    const shows =
+        document.querySelectorAll(".searchable");
+
+    results.innerHTML = "";
+
+    let found = false;
+
+    shows.forEach(function(show) {
+
+        const title =
+            show.dataset.title;
+
+        if (
+            title &&
+            title.toLowerCase().includes(input)
+        ) {
+
+            const result =
+                document.createElement("div");
+
+            result.className = "search-result";
+
+            result.textContent = title;
+
+            result.onclick = function() {
+
+                show.scrollIntoView({
+
+                    behavior: "smooth",
+
+                    block: "center"
+
+                });
+
+                toggleSearch();
+
+            };
+
+            results.appendChild(result);
+
+            found = true;
+
+        }
+
+    });
+
+    if (!found) {
+
+        results.innerHTML = `
+
+            <div class="search-result">
+                No shows found
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* ================= INFO ================= */
+
+function openInfo() {
+
+    document
+        .getElementById("infoTitle")
+        .textContent =
+        "The Minos Paradox";
+
+    document
+        .getElementById("infoText")
+        .innerHTML = `
+
+            <strong>The Minos Paradox</strong>
+            is a DT Stream feature film.
+
+            <br><br>
+
+            When the future of a city begins to collapse,
+            one young man must confront the past that
+            shaped his world.
+
+        `;
+
+    document
+        .getElementById("infoModal")
+        .style.display =
+        "flex";
+
+}
+
+function closeInfo() {
+
+    document
+        .getElementById("infoModal")
+        .style.display =
+        "none";
+
+}
+
+
+/* ================= CLOSE MODAL ================= */
+
+window.onclick = function(event) {
+
+    const modal =
+        document.getElementById("infoModal");
+
+    if (event.target === modal) {
+
+        closeInfo();
+
+    }
+
+};
+
+</script>
+
+</body>
+
+</html>

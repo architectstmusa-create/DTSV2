@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Who's watching? | DT Stream</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+>
+
+<style>
+
+:root {
+    --black: #080808;
+    --gold: #D4AF37;
+    --red: #B5121B;
+    --grey: #999;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #1a1a1a 0%,
+            #080808 65%
+        );
+
+    color: white;
+
+    font-family: "Sora", sans-serif;
+}
+
+/* ================= NAV ================= */
+
+nav {
+    width: 100%;
+
+    padding: 28px 5%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+
+    line-height: 0;
+}
+
+.dt-logo {
+    display: block;
+
+    width: 125px;
+    height: auto;
+
+    object-fit: contain;
+}
+
+/* ================= PAGE ================= */
+
+.profiles-page {
+    min-height: calc(100vh - 100px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 60px 20px 100px;
+}
+
+h1 {
+    font-size: clamp(32px, 5vw, 52px);
+
+    letter-spacing: -3px;
+
+    margin-bottom: 55px;
+
+    text-align: center;
+}
+
+/* ================= PROFILES ================= */
+
+.profiles {
+    display: flex;
+
+    gap: 35px;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+}
+
+.profile {
+    width: 150px;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.profile:hover {
+    transform: scale(1.08);
+}
+
+.profile-avatar {
+    width: 150px;
+    height: 150px;
+
+    border-radius: 6px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 55px;
+    font-weight: 800;
+
+    margin-bottom: 18px;
+
+    border: 3px solid transparent;
+
+    transition: 0.3s;
+}
+
+.profile:hover .profile-avatar {
+    border-color: white;
+}
+
+.profile-name {
+    color: #aaa;
+
+    font-size: 14px;
+}
+
+.profile:hover .profile-name {
+    color: white;
+}
+
+.add-profile {
+    background: #222;
+
+    color: #888;
+
+    font-size: 55px;
+}
+
+/* ================= MANAGE BUTTON ================= */
+
+.manage-button {
+    margin-top: 65px;
+
+    padding: 14px 28px;
+
+    background: transparent;
+
+    border: 1px solid #555;
+
+    color: #aaa;
+
+    font-family: "Sora", sans-serif;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.manage-button:hover {
+    border-color: var(--gold);
+
+    color: var(--gold);
+}
+
+/* ================= MANAGE AREA ================= */
+
+.manage-area {
+    display: none;
+
+    width: 100%;
+
+    max-width: 850px;
+
+    margin-top: 70px;
+}
+
+.manage-area.active {
+    display: block;
+}
+
+.manage-header {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+
+    padding-bottom: 20px;
+
+    margin-bottom: 25px;
+}
+
+.manage-header h2 {
+    font-size: 24px;
+}
+
+.close-manage {
+    background: none;
+
+    border: none;
+
+    color: #888;
+
+    font-family: "Sora", sans-serif;
+
+    cursor: pointer;
+}
+
+.close-manage:hover {
+    color: white;
+}
+
+/* ================= MANAGE CARDS ================= */
+
+.manage-card {
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 20px;
+
+    margin-bottom: 12px;
+
+    background: #111;
+
+    border: 1px solid rgba(255,255,255,0.1);
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.manage-card:hover {
+    border-color: var(--gold);
+
+    transform: translateX(5px);
+}
+
+.small-avatar {
+    width: 60px;
+    height: 60px;
+
+    border-radius: 5px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 22px;
+
+    font-weight: 800;
+
+    flex-shrink: 0;
+}
+
+.manage-card-info {
+    flex: 1;
+}
+
+.manage-card-info strong {
+    font-size: 15px;
+}
+
+.manage-card-info p {
+    color: #777;
+
+    font-size: 11px;
+
+    margin-top: 5px;
+}
+
+.manage-arrow {
+    color: #777;
+
+    font-size: 20px;
+}
+
+/* ================= EDIT PANEL ================= */
+
+.edit-panel {
+    display: none;
+
+    margin-top: 25px;
+
+    background: #111;
+
+    border: 1px solid rgba(255,255,255,0.1);
+
+    padding: 30px;
+}
+
+.edit-panel.active {
+    display: block;
+}
+
+.edit-title {
+    color: var(--gold);
+
+    font-size: 11px;
+
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 25px;
+}
+
+.edit-profile-header {
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding-bottom: 25px;
+
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+
+    margin-bottom: 25px;
+}
+
+.large-avatar {
+    width: 85px;
+    height: 85px;
+
+    border-radius: 6px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 32px;
+
+    font-weight: 800;
+}
+
+.edit-profile-header h3 {
+    font-size: 22px;
+}
+
+.edit-profile-header p {
+    color: #777;
+
+    font-size: 12px;
+
+    margin-top: 5px;
+}
+
+/* ================= SETTINGS ================= */
+
+.profile-setting {
+    padding: 22px 0;
+
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.profile-setting:last-child {
+    border-bottom: none;
+}
+
+.setting-title {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 8px;
+}
+
+.setting-title strong {
+    font-size: 14px;
+}
+
+.setting-description {
+    color: #777;
+
+    font-size: 11px;
+
+    margin-bottom: 15px;
+}
+
+/* ================= INPUT ================= */
+
+.name-input {
+    width: 100%;
+
+    max-width: 400px;
+
+    padding: 12px;
+
+    background: #080808;
+
+    border: 1px solid #444;
+
+    color: white;
+
+    font-family: "Sora", sans-serif;
+
+    outline: none;
+}
+
+.name-input:focus {
+    border-color: var(--gold);
+}
+
+/* ================= AVATARS ================= */
+
+.avatar-options {
+    display: flex;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+.avatar-option {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 4px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    border: 2px solid transparent;
+}
+
+.avatar-option.selected {
+    border-color: white;
+
+    transform: scale(1.08);
+}
+
+/* ================= SELECT ================= */
+
+select {
+    padding: 11px 15px;
+
+    background: #080808;
+
+    border: 1px solid #444;
+
+    color: white;
+
+    font-family: "Sora", sans-serif;
+
+    font-size: 12px;
+
+    cursor: pointer;
+}
+
+select:focus {
+    border-color: var(--gold);
+
+    outline: none;
+}
+
+/* ================= TOGGLE ================= */
+
+.toggle {
+    width: 44px;
+    height: 24px;
+
+    border-radius: 20px;
+
+    background: var(--red);
+
+    position: relative;
+
+    cursor: pointer;
+}
+
+.toggle::after {
+    content: "";
+
+    position: absolute;
+
+    width: 18px;
+    height: 18px;
+
+    top: 3px;
+    right: 3px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    transition: 0.3s;
+}
+
+.toggle.off {
+    background: #333;
+}
+
+.toggle.off::after {
+    right: 23px;
+}
+
+/* ================= BUTTONS ================= */
+
+.edit-buttons {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 25px;
+}
+
+.save-button {
+    padding: 13px 25px;
+
+    background: var(--gold);
+
+    color: #080808;
+
+    border: none;
+
+    font-family: "Sora", sans-serif;
+
+    font-weight: 800;
+
+    cursor: pointer;
+}
+
+.delete-button {
+    padding: 13px 25px;
+
+    background: transparent;
+
+    color: #ff6b6b;
+
+    border: 1px solid #8b3030;
+
+    font-family: "Sora", sans-serif;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    background: var(--red);
+
+    color: white;
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+    padding: 25px 5%;
+
+    color: #555;
+
+    font-size: 11px;
+
+    text-align: center;
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 600px) {
+
+    .profiles {
+        gap: 25px;
+    }
+
+    .profile,
+    .profile-avatar {
+        width: 115px;
+    }
+
+    .profile-avatar {
+        height: 115px;
+
+        font-size: 42px;
+    }
+
+    .manage-card {
+        padding: 15px;
+    }
+
+    .edit-panel {
+        padding: 20px;
+    }
+
+    .edit-buttons {
+        flex-direction: column;
+    }
+
+    .save-button,
+    .delete-button {
+        width: 100%;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav>
+
+    <a
+        href="index.html"
+        class="logo"
+    >
+
+        <img
+            src="DT Streamdud.png"
+            alt="DT Stream Logo"
+            class="dt-logo"
+        >
+
+    </a>
+
+</nav>
+
+<main class="profiles-page">
+
+    <h1>
+        Who's watching?
+    </h1>
+
+    <div
+        class="profiles"
+        id="profiles"
+    ></div>
+
+    <button
+        class="manage-button"
+        onclick="toggleManage()"
+    >
+        Manage Profiles
+    </button>
+
+    <section
+        class="manage-area"
+        id="manageArea"
+    >
+
+        <div class="manage-header">
+
+            <h2>
+                Manage Profiles
+            </h2>
+
+            <button
+                class="close-manage"
+                onclick="toggleManage()"
+            >
+                Close
+            </button>
+
+        </div>
+
+        <div id="manageProfiles"></div>
+
+        <div
+            class="edit-panel"
+            id="editPanel"
+        >
+
+            <div class="edit-title">
+                Profile Settings
+            </div>
+
+            <div
+                class="edit-profile-header"
+                id="editHeader"
+            ></div>
+
+            <div class="profile-setting">
+
+                <div class="setting-title">
+
+                    <strong>
+                        Profile Name
+                    </strong>
+
+                </div>
+
+                <div class="setting-description">
+                    Change the name displayed on your profile.
+                </div>
+
+                <input
+                    class="name-input"
+                    id="nameInput"
+                    type="text"
+                >
+
+            </div>
+
+            <div class="profile-setting">
+
+                <div class="setting-title">
+
+                    <strong>
+                        Avatar
+                    </strong>
+
+                </div>
+
+                <div class="setting-description">
+                    Choose your DT Stream profile avatar.
+                </div>
+
+                <div
+                    class="avatar-options"
+                    id="avatarOptions"
+                ></div>
+
+            </div>
+
+            <div class="profile-setting">
+
+                <div class="setting-title">
+
+                    <strong>
+                        Age & Content
+                    </strong>
+
+                </div>
+
+                <div class="setting-description">
+                    Control the content available on this profile.
+                </div>
+
+                <select id="ageRating">
+
+                    <option value="All Ages">
+                        All Ages
+                    </option>
+
+                    <option value="13+">
+                        13+
+                    </option>
+
+                    <option value="16+">
+                        16+
+                    </option>
+
+                    <option value="18+">
+                        18+
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="profile-setting">
+
+                <div class="setting-title">
+
+                    <strong>
+                        Subtitle Appearance
+                    </strong>
+
+                </div>
+
+                <div class="setting-description">
+                    Choose how subtitles appear while watching.
+                </div>
+
+                <select id="subtitleStyle">
+
+                    <option value="Default">
+                        Default
+                    </option>
+
+                    <option value="Large">
+                        Large Text
+                    </option>
+
+                    <option value="High Contrast">
+                        High Contrast
+                    </option>
+
+                    <option value="Yellow">
+                        Yellow Text
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="profile-setting">
+
+                <div class="setting-title">
+
+                    <strong>
+                        Autoplay
+                    </strong>
+
+                    <div
+                        class="toggle"
+                        id="autoplayToggle"
+                        onclick="toggleSetting('autoplay')"
+                    ></div>
+
+                </div>
+
+                <div class="setting-description">
+                    Automatically play the next episode or preview.
+                </div>
+
+            </div>
+
+            <div class="profile-setting">
+
+                <div class="setting-title">
+
+                    <strong>
+                        Personalised Recommendations
+                    </strong>
+
+                    <div
+                        class="toggle"
+                        id="recommendationToggle"
+                        onclick="toggleSetting('recommendations')"
+                    ></div>
+
+                </div>
+
+                <div class="setting-description">
+                    Use your viewing activity to improve recommendations.
+                </div>
+
+            </div>
+
+            <div class="edit-buttons">
+
+                <button
+                    class="save-button"
+                    onclick="saveProfile()"
+                >
+                    Save Changes
+                </button>
+
+                <button
+                    class="delete-button"
+                    onclick="deleteProfile()"
+                >
+                    Delete Profile
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+
+    © 2026 DT Stream — A Doar Tanar Company
+
+</footer>
+
+<script>
+
+const defaultProfiles = [
+
+    {
+        id: 1,
+        name: "Hannah",
+        colour: "#B5121B",
+        age: "All Ages",
+        subtitle: "Default",
+        autoplay: true,
+        recommendations: true
+    },
+
+    {
+        id: 2,
+        name: "Profile 2",
+        colour: "#254B5C",
+        age: "All Ages",
+        subtitle: "Default",
+        autoplay: true,
+        recommendations: true
+    },
+
+    {
+        id: 3,
+        name: "Profile 3",
+        colour: "#5C3D25",
+        age: "All Ages",
+        subtitle: "Default",
+        autoplay: true,
+        recommendations: true
+    }
+
+];
+
+let profiles = JSON.parse(
+    localStorage.getItem("dtProfiles")
+);
+
+if (!profiles || !Array.isArray(profiles)) {
+
+    profiles = defaultProfiles;
+
+    localStorage.setItem(
+        "dtProfiles",
+        JSON.stringify(profiles)
+    );
+
+}
+
+let selectedProfile = null;
+
+const avatarColours = [
+
+    "#B5121B",
+    "#254B5C",
+    "#5C3D25",
+    "#4B315E",
+    "#356B4B",
+    "#8B5A2B",
+    "#555555",
+    "#7A263A"
+
+];
+
+function getInitial(name) {
+
+    return name.trim().charAt(0).toUpperCase();
+
+}
+
+function saveProfiles() {
+
+    localStorage.setItem(
+        "dtProfiles",
+        JSON.stringify(profiles)
+    );
+
+}
+
+function renderProfiles() {
+
+    const container =
+        document.getElementById("profiles");
+
+    container.innerHTML = "";
+
+    profiles.forEach(function(profile) {
+
+        const element =
+            document.createElement("div");
+
+        element.className = "profile";
+
+        element.onclick = function() {
+
+            selectProfile(profile);
+
+        };
+
+        element.innerHTML = `
+
+            <div
+                class="profile-avatar"
+                style="background: ${profile.colour}"
+            >
+                ${getInitial(profile.name)}
+            </div>
+
+            <div class="profile-name">
+                ${profile.name}
+            </div>
+
+        `;
+
+        container.appendChild(element);
+
+    });
+
+    const add =
+        document.createElement("div");
+
+    add.className = "profile";
+
+    add.onclick = addProfile;
+
+    add.innerHTML = `
+
+        <div class="profile-avatar add-profile">
+            +
+        </div>
+
+        <div class="profile-name">
+            Add Profile
+        </div>
+
+    `;
+
+    container.appendChild(add);
+
+}
+
+function selectProfile(profile) {
+
+    localStorage.setItem(
+        "dtActiveProfile",
+        JSON.stringify(profile)
+    );
+
+    window.location.href = "home.html";
+
+}
+
+function addProfile() {
+
+    if (profiles.length >= 5) {
+
+        alert("You can have a maximum of 5 profiles.");
+
+        return;
+
+    }
+
+    const name =
+        prompt("Enter a profile name:");
+
+    if (!name || !name.trim()) {
+
+        return;
+
+    }
+
+    const newProfile = {
+
+        id: Date.now(),
+
+        name: name.trim(),
+
+        colour:
+            avatarColours[
+                profiles.length % avatarColours.length
+            ],
+
+        age: "All Ages",
+
+        subtitle: "Default",
+
+        autoplay: true,
+
+        recommendations: true
+
+    };
+
+    profiles.push(newProfile);
+
+    saveProfiles();
+
+    renderProfiles();
+
+}
+
+function toggleManage() {
+
+    const area =
+        document.getElementById("manageArea");
+
+    area.classList.toggle("active");
+
+    if (area.classList.contains("active")) {
+
+        renderManageProfiles();
+
+    }
+
+}
+
+function renderManageProfiles() {
+
+    const container =
+        document.getElementById("manageProfiles");
+
+    container.innerHTML = "";
+
+    profiles.forEach(function(profile) {
+
+        const card =
+            document.createElement("div");
+
+        card.className = "manage-card";
+
+        card.onclick = function() {
+
+            openProfileEditor(profile.id);
+
+        };
+
+        card.innerHTML = `
+
+            <div
+                class="small-avatar"
+                style="background: ${profile.colour}"
+            >
+                ${getInitial(profile.name)}
+            </div>
+
+            <div class="manage-card-info">
+
+                <strong>
+                    ${profile.name}
+                </strong>
+
+                <p>
+                    ${profile.age} · ${profile.subtitle} subtitles
+                </p>
+
+            </div>
+
+            <div class="manage-arrow">
+                →
+            </div>
+
+        `;
+
+        container.appendChild(card);
+
+    });
+
+}
+
+function openProfileEditor(id) {
+
+    selectedProfile =
+        profiles.find(function(profile) {
+
+            return profile.id === id;
+
+        });
+
+    if (!selectedProfile) {
+
+        return;
+
+    }
+
+    document
+        .getElementById("editPanel")
+        .classList.add("active");
+
+    document.getElementById("nameInput").value =
+        selectedProfile.name;
+
+    document.getElementById("ageRating").value =
+        selectedProfile.age;
+
+    document.getElementById("subtitleStyle").value =
+        selectedProfile.subtitle;
+
+    renderEditHeader();
+
+    renderAvatarOptions();
+
+    updateToggle(
+        "autoplayToggle",
+        selectedProfile.autoplay
+    );
+
+    updateToggle(
+        "recommendationToggle",
+        selectedProfile.recommendations
+    );
+
+}
+
+function renderEditHeader() {
+
+    document.getElementById("editHeader").innerHTML = `
+
+        <div
+            class="large-avatar"
+            style="background: ${selectedProfile.colour}"
+        >
+            ${getInitial(selectedProfile.name)}
+        </div>
+
+        <div>
+
+            <h3>
+                ${selectedProfile.name}
+            </h3>
+
+            <p>
+                Profile settings
+            </p>
+
+        </div>
+
+    `;
+
+}
+
+function renderAvatarOptions() {
+
+    const container =
+        document.getElementById("avatarOptions");
+
+    container.innerHTML = "";
+
+    avatarColours.forEach(function(colour) {
+
+        const avatar =
+            document.createElement("div");
+
+        avatar.className = "avatar-option";
+
+        avatar.style.background = colour;
+
+        avatar.innerText =
+            getInitial(selectedProfile.name);
+
+        if (colour === selectedProfile.colour) {
+
+            avatar.classList.add("selected");
+
+        }
+
+        avatar.onclick = function() {
+
+            selectedProfile.colour = colour;
+
+            renderAvatarOptions();
+
+            renderEditHeader();
+
+        };
+
+        container.appendChild(avatar);
+
+    });
+
+}
+
+function toggleSetting(setting) {
+
+    if (setting === "autoplay") {
+
+        selectedProfile.autoplay =
+            !selectedProfile.autoplay;
+
+        updateToggle(
+            "autoplayToggle",
+            selectedProfile.autoplay
+        );
+
+    }
+
+    if (setting === "recommendations") {
+
+        selectedProfile.recommendations =
+            !selectedProfile.recommendations;
+
+        updateToggle(
+            "recommendationToggle",
+            selectedProfile.recommendations
+        );
+
+    }
+
+}
+
+function updateToggle(id, active) {
+
+    const toggle =
+        document.getElementById(id);
+
+    if (active) {
+
+        toggle.classList.remove("off");
+
+    } else {
+
+        toggle.classList.add("off");
+
+    }
+
+}
+
+function saveProfile() {
+
+    const newName =
+        document
+            .getElementById("nameInput")
+            .value
+            .trim();
+
+    if (!newName) {
+
+        alert("Profile name cannot be empty.");
+
+        return;
+
+    }
+
+    selectedProfile.name =
+        newName;
+
+    selectedProfile.age =
+        document
+            .getElementById("ageRating")
+            .value;
+
+    selectedProfile.subtitle =
+        document
+            .getElementById("subtitleStyle")
+            .value;
+
+    saveProfiles();
+
+    renderProfiles();
+
+    renderManageProfiles();
+
+    renderEditHeader();
+
+    renderAvatarOptions();
+
+    alert("Profile settings saved.");
+
+}
+
+function deleteProfile() {
+
+    if (profiles.length <= 1) {
+
+        alert("You must have at least one profile.");
+
+        return;
+
+    }
+
+    const confirmDelete =
+        confirm(
+            "Delete " + selectedProfile.name + "'s profile?"
+        );
+
+    if (!confirmDelete) {
+
+        return;
+
+    }
+
+    profiles =
+        profiles.filter(function(profile) {
+
+            return profile.id !== selectedProfile.id;
+
+        });
+
+    selectedProfile = null;
+
+    saveProfiles();
+
+    renderProfiles();
+
+    renderManageProfiles();
+
+    document
+        .getElementById("editPanel")
+        .classList.remove("active");
+
+}
+
+renderProfiles();
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>DT Stream</title>
+
+<style>
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+
+        background: #000;
+
+        overflow: hidden;
+    }
+
+    .intro {
+        width: 100vw;
+        height: 100vh;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        position: relative;
+
+        background:
+            radial-gradient(
+                circle at center,
+                #171717 0%,
+                #050505 45%,
+                #000000 100%
+            );
+
+        animation: backgroundReveal 3.5s ease forwards;
+    }
+
+    /* BIGGER YELLOW AND RED GLOW */
+
+    .intro::before {
+
+        content: "";
+
+        position: absolute;
+
+        width: 900px;
+        height: 900px;
+
+        border-radius: 50%;
+
+        background:
+            radial-gradient(
+                circle,
+                rgba(181,18,27,0.5),
+                rgba(212,175,55,0.28) 30%,
+                rgba(212,175,55,0.12) 45%,
+                transparent 72%
+            );
+
+        animation: glow 3.5s ease forwards;
+
+    }
+
+    /* LOGO */
+
+    .logo {
+
+        position: relative;
+
+        z-index: 2;
+
+        width: 520px;
+
+        opacity: 0;
+
+        transform: scale(0.55);
+
+        filter: blur(18px);
+
+        animation: logoReveal 2s ease 0.4s forwards;
+
+    }
+
+    .tagline {
+
+        position: absolute;
+
+        bottom: 15%;
+
+        color: #777;
+
+        font-family: Arial, sans-serif;
+
+        font-size: 10px;
+
+        letter-spacing: 5px;
+
+        text-transform: uppercase;
+
+        opacity: 0;
+
+        animation: taglineReveal 1s ease 2.1s forwards;
+
+    }
+
+    @keyframes backgroundReveal {
+
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+
+    }
+
+    @keyframes glow {
+
+        0% {
+
+            opacity: 0;
+
+            transform: scale(0.25);
+
+        }
+
+        45% {
+
+            opacity: 1;
+
+            transform: scale(1.15);
+
+        }
+
+        70% {
+
+            opacity: 0.85;
+
+            transform: scale(1);
+
+        }
+
+        100% {
+
+            opacity: 0.55;
+
+            transform: scale(1);
+
+        }
+
+    }
+
+    @keyframes logoReveal {
+
+        0% {
+
+            opacity: 0;
+
+            transform: scale(0.55);
+
+            filter: blur(18px);
+
+        }
+
+        55% {
+
+            opacity: 1;
+
+            filter: blur(0);
+
+        }
+
+        75% {
+
+            transform: scale(1.04);
+
+        }
+
+        100% {
+
+            opacity: 1;
+
+            transform: scale(1);
+
+            filter: blur(0);
+
+        }
+
+    }
+
+    @keyframes taglineReveal {
+
+        0% {
+
+            opacity: 0;
+
+            transform: translateY(12px);
+
+        }
+
+        100% {
+
+            opacity: 1;
+
+            transform: translateY(0);
+
+        }
+
+    }
+
+    @media (max-width: 600px) {
+
+        .logo {
+            width: 330px;
+        }
+
+        .intro::before {
+            width: 650px;
+            height: 650px;
+        }
+
+        .tagline {
+            font-size: 8px;
+            letter-spacing: 3px;
+        }
+
+    }
+
+</style>
+
+</head>
+
+<body>
+
+    <audio id="introSound" autoplay>
+    <source src="intro-sound.mp3" type="audio/mpeg">
+</audio>
+
+<div class="intro">
+
+```
+<img
+    src="DT Streamdud.png"
+    alt="DT Stream Logo"
+    class="logo"
+>
+
+<div class="tagline">
+    African stories. Made for us.
+</div>
+```
+
+</div>
+
+<script>
+
+    setTimeout(function() {
+
+        window.location.href = "index.html";
+
+    }, 3500);
+
+</script>
+
+</body>
+
+</html>

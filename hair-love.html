@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hair Love | DT Stream</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #050505;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* NAVIGATION */
+
+        nav {
+            height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+            background: linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 0.95),
+                rgba(0, 0, 0, 0.65),
+                transparent
+            );
+        }
+
+        .logo img {
+            width: 105px;
+            display: block;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: white;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 11px 20px;
+            border: 1px solid rgba(255,255,255,0.35);
+            border-radius: 4px;
+            transition: 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: white;
+            color: black;
+        }
+
+        /* MOVIE PAGE */
+
+        .movie-page {
+            padding-top: 100px;
+            min-height: 100vh;
+        }
+
+        /* VIDEO */
+
+        .video-section {
+            width: 92%;
+            max-width: 1450px;
+            margin: auto;
+        }
+
+        .video-wrapper {
+            position: relative;
+            background: #000;
+            overflow: hidden;
+            border-radius: 6px;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.7);
+        }
+
+        video {
+            width: 100%;
+            display: block;
+            max-height: 78vh;
+            background: black;
+        }
+
+        /* MOVIE DETAILS */
+
+        .movie-details {
+            width: 92%;
+            max-width: 1450px;
+            margin: 35px auto 80px;
+        }
+
+        .movie-title {
+            font-size: 38px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+
+        .movie-meta {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            color: #a9a9a9;
+            font-size: 14px;
+            margin-bottom: 22px;
+        }
+
+        .rating {
+            color: white;
+            border: 1px solid #777;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+
+        .movie-description {
+            max-width: 720px;
+            color: #aaa;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .movie-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .action-btn {
+            background: transparent;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.35);
+            padding: 12px 22px;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .action-btn:hover {
+            background: white;
+            color: black;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            nav {
+                padding: 0 20px;
+            }
+
+            .logo img {
+                width: 85px;
+            }
+
+            .movie-page {
+                padding-top: 90px;
+            }
+
+            .video-section,
+            .movie-details {
+                width: 94%;
+            }
+
+            .movie-title {
+                font-size: 27px;
+            }
+
+            .movie-meta {
+                gap: 10px;
+                flex-wrap: wrap;
+            }
+
+            .movie-description {
+                font-size: 14px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+    <nav>
+
+        <a href="home.html" class="logo">
+
+            <img src="DTStreamLogo.png" alt="DT Stream">
+
+        </a>
+
+
+        <a href="home.html" class="back-btn">
+
+            ← Back
+
+        </a>
+
+    </nav>
+
+
+    <main class="movie-page">
+
+
+        <section class="video-section">
+
+            <div class="video-wrapper">
+
+                <video controls autoplay>
+
+                    <source src="Hair Love.mp4" type="video/mp4">
+
+                    Your browser does not support video playback.
+
+                </video>
+
+            </div>
+
+        </section>
+
+
+        <section class="movie-details">
+
+            <h1 class="movie-title">
+                Hair Love
+            </h1>
+
+
+            <div class="movie-meta">
+
+                <span>2019</span>
+
+                <span>•</span>
+
+                <span>Light-hearted</span>
+
+                <span>•</span>
+
+                <span>6.47m</span>
+
+                <span class="rating">
+                    All Ages
+                </span>
+
+            </div>
+
+
+            <p class="movie-description">
+
+Hair Love, an Oscar®-winning animated short film from Matthew A. Cherry, tells the heartfelt story of an African American father learning to do his daughter’s hair for the first time. 
+
+
+            </p>
+
+
+            <div class="movie-actions">
+
+                <button class="action-btn" onclick="addToList()">
+
+                    + My List
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <script>
+
+        function addToList() {
+
+            alert("Added to My List");
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

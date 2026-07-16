@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+```
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Profile | DT Stream</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+    :root {
+        --black: #080808;
+        --gold: #D4AF37;
+        --red: #B5121B;
+        --grey: #A5A5A5;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        background: var(--black);
+        color: white;
+        font-family: 'Sora', sans-serif;
+        min-height: 100vh;
+    }
+
+    nav {
+        height: 85px;
+        padding: 0 5%;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        background: #080808;
+    }
+
+    .logo img {
+        width: 130px;
+        display: block;
+    }
+
+    .back-button {
+        color: #aaa;
+        text-decoration: none;
+        font-size: 13px;
+        transition: 0.3s;
+    }
+
+    .back-button:hover {
+        color: white;
+    }
+
+    .page {
+        max-width: 1000px;
+        margin: auto;
+        padding: 70px 5%;
+    }
+
+    .page-label {
+        color: var(--gold);
+        font-size: 11px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+    }
+
+    h1 {
+        font-size: 48px;
+        letter-spacing: -3px;
+        margin-bottom: 50px;
+    }
+
+    .profile-header {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+
+        padding-bottom: 45px;
+
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .large-profile {
+        width: 90px;
+        height: 90px;
+
+        border-radius: 50%;
+
+        background: var(--red);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 32px;
+        font-weight: 800;
+    }
+
+    .profile-details h2 {
+        font-size: 25px;
+        margin-bottom: 8px;
+    }
+
+    .profile-details p {
+        color: #777;
+        font-size: 13px;
+    }
+
+    .settings {
+        margin-top: 45px;
+    }
+
+    .settings h2 {
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+
+    .setting-card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        padding: 22px 25px;
+
+        border: 1px solid rgba(255,255,255,0.1);
+        background: #111;
+
+        margin-bottom: 10px;
+
+        transition: 0.3s;
+    }
+
+    .setting-card:hover {
+        border-color: var(--gold);
+    }
+
+    .setting-info strong {
+        display: block;
+        font-size: 14px;
+        margin-bottom: 6px;
+    }
+
+    .setting-info p {
+        color: #777;
+        font-size: 12px;
+    }
+
+    .setting-action {
+        color: var(--gold);
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    .setting-action:hover {
+        color: white;
+    }
+
+    .toggle {
+        width: 44px;
+        height: 24px;
+
+        border-radius: 20px;
+
+        background: var(--red);
+
+        position: relative;
+        cursor: pointer;
+    }
+
+    .toggle::after {
+        content: "";
+
+        position: absolute;
+
+        width: 18px;
+        height: 18px;
+
+        top: 3px;
+        right: 3px;
+
+        border-radius: 50%;
+
+        background: white;
+
+        transition: 0.3s;
+    }
+
+    .toggle.off {
+        background: #333;
+    }
+
+    .toggle.off::after {
+        right: 23px;
+    }
+
+    .danger {
+        margin-top: 50px;
+        padding-top: 35px;
+
+        border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .logout {
+        display: inline-block;
+
+        padding: 13px 22px;
+
+        border: 1px solid var(--red);
+
+        color: white;
+
+        text-decoration: none;
+
+        font-size: 12px;
+        font-weight: 700;
+
+        transition: 0.3s;
+    }
+
+    .logout:hover {
+        background: var(--red);
+    }
+
+    footer {
+        padding: 30px 5%;
+        color: #555;
+        font-size: 12px;
+    }
+
+    /* MODAL */
+
+    .modal {
+        position: fixed;
+        inset: 0;
+
+        background: rgba(0,0,0,0.85);
+
+        display: none;
+
+        align-items: center;
+        justify-content: center;
+
+        z-index: 100;
+
+        padding: 20px;
+    }
+
+    .modal-box {
+        width: 100%;
+        max-width: 450px;
+
+        background: #151515;
+
+        border: 1px solid #333;
+
+        padding: 35px;
+
+        border-radius: 8px;
+
+        position: relative;
+    }
+
+    .modal-box h2 {
+        font-size: 24px;
+        margin-bottom: 25px;
+    }
+
+    .close {
+        position: absolute;
+
+        top: 15px;
+        right: 20px;
+
+        font-size: 25px;
+
+        color: #aaa;
+
+        cursor: pointer;
+    }
+
+    .close:hover {
+        color: white;
+    }
+
+    .modal-box label {
+        display: block;
+
+        color: #aaa;
+
+        font-size: 10px;
+
+        text-transform: uppercase;
+
+        letter-spacing: 1px;
+
+        margin-bottom: 7px;
+    }
+
+    .modal-box input {
+        width: 100%;
+
+        padding: 14px;
+
+        margin-bottom: 18px;
+
+        background: #252525;
+
+        border: 1px solid #444;
+
+        border-radius: 4px;
+
+        color: white;
+
+        font-family: 'Sora', sans-serif;
+    }
+
+    .save-button {
+        width: 100%;
+
+        padding: 14px;
+
+        border: none;
+
+        border-radius: 4px;
+
+        background: var(--red);
+
+        color: white;
+
+        font-family: 'Sora', sans-serif;
+
+        font-weight: 700;
+
+        cursor: pointer;
+    }
+
+    .save-button:hover {
+        background: var(--gold);
+        color: var(--black);
+    }
+
+    @media (max-width: 600px) {
+
+        .page {
+            padding: 50px 6%;
+        }
+
+        h1 {
+            font-size: 38px;
+        }
+
+        .setting-card {
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+    }
+
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<nav>
+
+    <a href="home.html" class="logo">
+
+        <img
+            src="DT Streamdud.png"
+            alt="DT Stream Logo"
+        >
+
+    </a>
+
+    <a
+        href="home.html"
+        class="back-button"
+    >
+
+        ← Back to DT Stream
+
+    </a>
+
+</nav>
+
+
+<main class="page">
+
+    <div class="page-label">
+        Account
+    </div>
+
+    <h1>
+        Profile & Settings
+    </h1>
+
+
+    <section class="profile-header">
+
+        <div
+            class="large-profile"
+            id="profileInitial"
+        >
+            +
+        </div>
+
+        <div class="profile-details">
+
+            <h2 id="profileName">
+                Create your account
+            </h2>
+
+            <p id="profileEmail">
+                DT Stream member
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <section class="settings">
+
+        <h2>
+            Account Settings
+        </h2>
+
+
+        <div class="setting-card">
+
+            <div class="setting-info">
+
+                <strong>
+                    Profile
+                </strong>
+
+                <p>
+                    Manage your profile name and avatar
+                </p>
+
+            </div>
+
+            <div
+                class="setting-action"
+                onclick="openProfileModal()"
+            >
+                Edit
+            </div>
+
+        </div>
+
+
+        <div class="setting-card">
+
+            <div class="setting-info">
+
+                <strong>
+                    Email
+                </strong>
+
+                <p>
+                    Manage your email address
+                </p>
+
+            </div>
+
+            <div
+                class="setting-action"
+                onclick="openEmailModal()"
+            >
+                Edit
+            </div>
+
+        </div>
+
+
+        <div class="setting-card">
+
+            <div class="setting-info">
+
+                <strong>
+                    Password
+                </strong>
+
+                <p>
+                    Update your account password
+                </p>
+
+            </div>
+
+            <div
+                class="setting-action"
+                onclick="openPasswordModal()"
+            >
+                Change
+            </div>
+
+        </div>
+
+
+        <div class="setting-card">
+
+            <div class="setting-info">
+
+                <strong>
+                    Autoplay
+                </strong>
+
+                <p>
+                    Automatically play the next episode
+                </p>
+
+            </div>
+
+            <div
+                class="toggle"
+                id="autoplayToggle"
+                onclick="toggleSetting(this)"
+            ></div>
+
+        </div>
+
+
+        <div class="setting-card">
+
+            <div class="setting-info">
+
+                <strong>
+                    Notifications
+                </strong>
+
+                <p>
+                    Receive updates about new content
+                </p>
+
+            </div>
+
+            <div
+                class="toggle off"
+                id="notificationToggle"
+                onclick="toggleSetting(this)"
+            ></div>
+
+        </div>
+
+    </section>
+
+
+    <section class="danger">
+
+        <a
+            href="index.html"
+            class="logout"
+            onclick="logout()"
+        >
+            Log out
+        </a>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    © 2026 DT Stream — A Doar Tanar Company
+
+</footer>
+
+
+<!-- PROFILE MODAL -->
+
+<div
+    class="modal"
+    id="profileModal"
+>
+
+    <div class="modal-box">
+
+        <div
+            class="close"
+            onclick="closeModal('profileModal')"
+        >
+            ×
+        </div>
+
+        <h2>
+            Edit Profile
+        </h2>
+
+        <label>
+            Profile Name
+        </label>
+
+        <input
+            type="text"
+            id="nameInput"
+            placeholder="Enter profile name"
+        >
+
+        <button
+            class="save-button"
+            onclick="saveName()"
+        >
+            Save Profile
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- EMAIL MODAL -->
+
+<div
+    class="modal"
+    id="emailModal"
+>
+
+    <div class="modal-box">
+
+        <div
+            class="close"
+            onclick="closeModal('emailModal')"
+        >
+            ×
+        </div>
+
+        <h2>
+            Edit Email
+        </h2>
+
+        <label>
+            Email Address
+        </label>
+
+        <input
+            type="email"
+            id="emailInput"
+            placeholder="Enter your email"
+        >
+
+        <button
+            class="save-button"
+            onclick="saveEmail()"
+        >
+            Save Email
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- PASSWORD MODAL -->
+
+<div
+    class="modal"
+    id="passwordModal"
+>
+
+    <div class="modal-box">
+
+        <div
+            class="close"
+            onclick="closeModal('passwordModal')"
+        >
+            ×
+        </div>
+
+        <h2>
+            Change Password
+        </h2>
+
+        <label>
+            New Password
+        </label>
+
+        <input
+            type="password"
+            id="passwordInput"
+            placeholder="Enter new password"
+        >
+
+        <button
+            class="save-button"
+            onclick="savePassword()"
+        >
+            Update Password
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+
+    function loadProfile() {
+
+        const name =
+            localStorage.getItem("dtProfileName");
+
+        const email =
+            localStorage.getItem("dtProfileEmail");
+
+        if (name) {
+
+            document
+                .getElementById("profileName")
+                .innerText = name;
+
+            document
+                .getElementById("profileInitial")
+                .innerText =
+                name.charAt(0).toUpperCase();
+
+        }
+
+        if (email) {
+
+            document
+                .getElementById("profileEmail")
+                .innerText = email;
+
+        }
+
+    }
+
+
+    function openProfileModal() {
+
+        document
+            .getElementById("nameInput")
+            .value =
+            localStorage.getItem("dtProfileName") || "";
+
+        document
+            .getElementById("profileModal")
+            .style.display = "flex";
+
+    }
+
+
+    function saveName() {
+
+        const name =
+            document
+            .getElementById("nameInput")
+            .value
+            .trim();
+
+        if (!name) {
+
+            alert("Please enter a profile name.");
+
+            return;
+
+        }
+
+        localStorage.setItem(
+            "dtProfileName",
+            name
+        );
+
+        document
+            .getElementById("profileName")
+            .innerText = name;
+
+        document
+            .getElementById("profileInitial")
+            .innerText =
+            name.charAt(0).toUpperCase();
+
+        closeModal("profileModal");
+
+    }
+
+
+    function openEmailModal() {
+
+        document
+            .getElementById("emailInput")
+            .value =
+            localStorage.getItem("dtProfileEmail") || "";
+
+        document
+            .getElementById("emailModal")
+            .style.display = "flex";
+
+    }
+
+
+    function saveEmail() {
+
+        const email =
+            document
+            .getElementById("emailInput")
+            .value
+            .trim();
+
+        if (!email) {
+
+            alert("Please enter an email address.");
+
+            return;
+
+        }
+
+        localStorage.setItem(
+            "dtProfileEmail",
+            email
+        );
+
+        document
+            .getElementById("profileEmail")
+            .innerText = email;
+
+        closeModal("emailModal");
+
+    }
+
+
+    function openPasswordModal() {
+
+        document
+            .getElementById("passwordInput")
+            .value = "";
+
+        document
+            .getElementById("passwordModal")
+            .style.display = "flex";
+
+    }
+
+
+    function savePassword() {
+
+        const password =
+            document
+            .getElementById("passwordInput")
+            .value
+            .trim();
+
+        if (password.length < 6) {
+
+            alert("Password must be at least 6 characters.");
+
+            return;
+
+        }
+
+        localStorage.setItem(
+            "dtProfilePassword",
+            password
+        );
+
+        alert("Password updated successfully.");
+
+        closeModal("passwordModal");
+
+    }
+
+
+    function toggleSetting(element) {
+
+        element.classList.toggle("off");
+
+    }
+
+
+    function closeModal(id) {
+
+        document
+            .getElementById(id)
+            .style.display = "none";
+
+    }
+
+
+    function logout() {
+
+        localStorage.removeItem("dtProfileName");
+        localStorage.removeItem("dtProfileEmail");
+        localStorage.removeItem("dtProfilePassword");
+
+    }
+
+
+    window.onclick = function(event) {
+
+        if (
+            event.target.classList.contains("modal")
+        ) {
+
+            event.target.style.display = "none";
+
+        }
+
+    };
+
+
+    loadProfile();
+
+
+</script>
+```
+
+</body>
+
+</html>

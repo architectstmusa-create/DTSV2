@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My List | DT Stream</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+:root {
+    --black: #080808;
+    --gold: #D4AF37;
+    --red: #B5121B;
+    --grey: #A5A5A5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--black);
+    color: white;
+    font-family: 'Sora', sans-serif;
+}
+
+/* NAVIGATION */
+
+nav {
+    height: 85px;
+
+    padding: 0 5%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+
+    background: #080808;
+}
+
+.logo img {
+    width: 130px;
+
+    display: block;
+}
+
+.back-button {
+    color: #aaa;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    transition: 0.3s;
+}
+
+.back-button:hover {
+    color: white;
+}
+
+/* PAGE */
+
+.page {
+    max-width: 1200px;
+
+    margin: auto;
+
+    padding: 70px 5% 100px;
+}
+
+.page-label {
+    color: var(--gold);
+
+    font-size: 11px;
+
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-size: 52px;
+
+    letter-spacing: -3px;
+
+    margin-bottom: 45px;
+}
+
+/* CONTENT GRID */
+
+.content-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 18px;
+}
+
+/* MOVIE CARD */
+
+.movie-card {
+    position: relative;
+
+    height: 330px;
+
+    overflow: hidden;
+
+    border-radius: 5px;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(0,0,0,0.95),
+            transparent 65%
+        ),
+        linear-gradient(
+            145deg,
+            #8e710f,
+            #080808
+        );
+
+    border: 1px solid rgba(255,255,255,0.1);
+
+    transition: 0.4s;
+}
+
+.movie-card:hover {
+    transform: translateY(-8px);
+
+    border-color: var(--gold);
+}
+
+.movie-card::before {
+    content: "DT";
+
+    position: absolute;
+
+    top: 15px;
+    right: 15px;
+
+    font-size: 90px;
+
+    font-weight: 800;
+
+    color: rgba(255,255,255,0.08);
+}
+
+.movie-content {
+    position: absolute;
+
+    bottom: 0;
+
+    width: 100%;
+
+    padding: 22px;
+}
+
+.movie-content small {
+    color: var(--gold);
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+.movie-content h2 {
+    font-size: 20px;
+
+    margin: 8px 0;
+}
+
+.movie-content p {
+    color: #aaa;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+.movie-actions {
+    display: flex;
+
+    gap: 8px;
+
+    margin-top: 15px;
+}
+
+.watch-button,
+.remove-button {
+    padding: 9px 12px;
+
+    border-radius: 3px;
+
+    font-family: 'Sora', sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.watch-button {
+    border: none;
+
+    background: white;
+
+    color: #080808;
+}
+
+.watch-button:hover {
+    background: var(--gold);
+}
+
+.remove-button {
+    border: 1px solid #555;
+
+    background: transparent;
+
+    color: white;
+}
+
+.remove-button:hover {
+    border-color: var(--red);
+
+    background: var(--red);
+}
+
+/* EMPTY STATE */
+
+.empty-state {
+    display: none;
+
+    padding: 80px 20px;
+
+    text-align: center;
+
+    border: 1px solid rgba(255,255,255,0.1);
+
+    background: #111;
+}
+
+.empty-state h2 {
+    font-size: 25px;
+
+    margin-bottom: 12px;
+}
+
+.empty-state p {
+    color: #777;
+
+    font-size: 13px;
+
+    margin-bottom: 25px;
+}
+
+.browse-button {
+    display: inline-block;
+
+    padding: 13px 22px;
+
+    background: var(--red);
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    transition: 0.3s;
+}
+
+.browse-button:hover {
+    background: var(--gold);
+
+    color: #080808;
+}
+
+/* FOOTER */
+
+footer {
+    padding: 30px 5%;
+
+    color: #555;
+
+    font-size: 12px;
+}
+
+/* MOBILE */
+
+@media (max-width: 900px) {
+
+    .content-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .page {
+        padding: 50px 6%;
+    }
+
+    h1 {
+        font-size: 38px;
+    }
+
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<nav>
+
+    <a href="home.html" class="logo">
+
+        <img
+            src="DTStreamLogo.png"
+            alt="DT Stream Logo"
+        >
+
+    </a>
+
+
+    <a
+        href="home.html"
+        class="back-button"
+    >
+
+        ← Back to DT Stream
+
+    </a>
+
+</nav>
+
+
+<main class="page">
+
+    <div class="page-label">
+        Your collection
+    </div>
+
+
+    <h1>
+        My List
+    </h1>
+
+
+    <div
+        class="content-grid"
+        id="contentGrid"
+    ></div>
+
+
+    <div
+        class="empty-state"
+        id="emptyState"
+    >
+
+        <h2>
+            Your list is empty.
+        </h2>
+
+
+        <p>
+            Add movies and shows you want to watch later.
+        </p>
+
+
+        <a
+            href="home.html"
+            class="browse-button"
+        >
+
+            Browse DT Stream
+
+        </a>
+
+    </div>
+
+</main>
+
+
+<footer>
+
+    © 2026 DT Stream — A Doar Tanar Company
+
+</footer>
+
+
+<script>
+
+const contentGrid = document.getElementById("contentGrid");
+
+const emptyState = document.getElementById("emptyState");
+
+
+function loadMyList() {
+
+    const myList = JSON.parse(
+        localStorage.getItem("dtMyList")
+    ) || [];
+
+
+    if (myList.length === 0) {
+
+        contentGrid.style.display = "none";
+
+        emptyState.style.display = "block";
+
+        return;
+
+    }
+
+
+    contentGrid.innerHTML = "";
+
+
+    myList.forEach(function(movie, index) {
+
+        const card = document.createElement("div");
+
+        card.className = "movie-card";
+
+
+        card.innerHTML = `
+
+            <div class="movie-content">
+
+                <small>
+                    DT STREAM
+                </small>
+
+                <h2>
+                    ${movie.title}
+                </h2>
+
+                <p>
+                    Saved to your personal collection.
+                </p>
+
+                <div class="movie-actions">
+
+                    <button
+                        class="watch-button"
+                        onclick="watchMovie('${movie.link}')"
+                    >
+                        ▶ Watch
+                    </button>
+
+                    <button
+                        class="remove-button"
+                        onclick="removeMovie(${index})"
+                    >
+                        Remove
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        contentGrid.appendChild(card);
+
+    });
+
+}
+
+
+function watchMovie(link) {
+
+    window.location.href = link;
+
+}
+
+
+function removeMovie(index) {
+
+    const myList = JSON.parse(
+        localStorage.getItem("dtMyList")
+    ) || [];
+
+
+    myList.splice(index, 1);
+
+
+    localStorage.setItem(
+        "dtMyList",
+        JSON.stringify(myList)
+    );
+
+
+    loadMyList();
+
+}
+
+
+loadMyList();
+
+</script>
+
+
+</body>
+
+</html>

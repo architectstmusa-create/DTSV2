@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Kapfupi Reloaded | DT Stream</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+>
+
+<style>
+
+:root {
+    --black: #050505;
+    --dark: #101010;
+    --gold: #d4af37;
+    --white: #f4f1ea;
+    --grey: #8b8b8b;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--dark);
+    color: white;
+    font-family: "Sora", sans-serif;
+}
+
+/* ================= NAVIGATION ================= */
+
+.nav-band {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 92px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 5%;
+
+    background: rgba(5, 5, 5, 0.96);
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+    z-index: 1000;
+}
+
+.logo img {
+    width: 175px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 38px;
+    margin-left: 60px;
+}
+
+.nav-link {
+    color: #9d9d9d;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.nav-link:hover {
+    color: white;
+}
+
+.nav-right {
+    margin-left: auto;
+}
+
+.profile-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    color: white;
+    text-decoration: none;
+}
+
+.profile-avatar {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 5px;
+
+    background: #6d201d;
+
+    font-weight: 800;
+}
+
+/* ================= SERIES HERO ================= */
+
+.series-hero {
+    min-height: 570px;
+
+    padding: 180px 5% 80px;
+
+    position: relative;
+
+    display: flex;
+    align-items: flex-end;
+
+    background:
+        linear-gradient(
+            to right,
+            rgba(0, 0, 0, 0.95),
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.2)
+        ),
+        linear-gradient(
+            to top,
+            var(--dark),
+            transparent
+        ),
+        url("Kapfupi Reloaded.jpg");
+
+    background-size: cover;
+    background-position: center;
+}
+
+.series-content {
+    max-width: 650px;
+}
+
+.series-label {
+    color: var(--gold);
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 18px;
+}
+
+.series-title {
+    font-size: clamp(50px, 7vw, 90px);
+
+    line-height: 0.9;
+    letter-spacing: -5px;
+
+    margin-bottom: 25px;
+}
+
+.series-meta {
+    color: #ccc;
+
+    font-size: 12px;
+
+    margin-bottom: 20px;
+}
+
+.series-description {
+    color: #cfcfcf;
+
+    font-size: 15px;
+    line-height: 1.8;
+
+    max-width: 540px;
+}
+
+/* ================= EPISODES ================= */
+
+.episodes-section {
+    padding: 70px 5%;
+}
+
+.episodes-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+
+    margin-bottom: 35px;
+}
+
+.episodes-title {
+    font-size: 32px;
+}
+
+.season {
+    color: var(--grey);
+
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.episode {
+    display: flex;
+
+    gap: 25px;
+
+    padding: 25px 0;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    text-decoration: none;
+
+    color: white;
+
+    transition: 0.3s;
+}
+
+.episode:hover {
+    transform: translateX(8px);
+}
+
+.episode-image {
+    width: 260px;
+    height: 145px;
+
+    flex-shrink: 0;
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 5px;
+
+    background: #222;
+}
+
+.episode-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: 0.4s;
+}
+
+.episode:hover .episode-image img {
+    transform: scale(1.06);
+}
+
+.episode-play {
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 32px;
+
+    background: rgba(0, 0, 0, 0.3);
+
+    opacity: 0;
+
+    transition: 0.3s;
+}
+
+.episode:hover .episode-play {
+    opacity: 1;
+}
+
+.episode-info {
+    padding-top: 5px;
+}
+
+.episode-number {
+    color: var(--gold);
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 10px;
+}
+
+.episode-title {
+    font-size: 22px;
+    font-weight: 700;
+
+    margin-bottom: 10px;
+}
+
+.episode-description {
+    color: #999;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+
+    max-width: 600px;
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+    padding: 60px 5% 35px;
+
+    color: #555;
+
+    font-size: 11px;
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 700px) {
+
+    .nav-band {
+        height: 76px;
+        padding: 0 20px;
+    }
+
+    .logo img {
+        width: 140px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .series-hero {
+        min-height: 570px;
+        padding: 150px 25px 60px;
+    }
+
+    .series-title {
+        letter-spacing: -3px;
+    }
+
+    .episodes-section {
+        padding: 50px 20px;
+    }
+
+    .episodes-header {
+        display: block;
+    }
+
+    .season {
+        display: block;
+        margin-top: 8px;
+    }
+
+    .episode {
+        gap: 15px;
+    }
+
+    .episode-image {
+        width: 130px;
+        height: 85px;
+    }
+
+    .episode-title {
+        font-size: 15px;
+    }
+
+    .episode-description {
+        font-size: 11px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- ================= NAVIGATION ================= -->
+
+<nav class="nav-band">
+
+    <a href="home.html" class="logo">
+
+        <img
+            src="DT Streamdud.png"
+            alt="DT Stream Logo"
+        >
+
+    </a>
+
+    <div class="nav-links">
+
+        <a href="home.html" class="nav-link">
+            Home
+        </a>
+
+        <a href="home.html#movies" class="nav-link">
+            Movies
+        </a>
+
+        <a href="home.html#series" class="nav-link">
+            Series
+        </a>
+
+        <a href="home.html#my-list" class="nav-link">
+            My List
+        </a>
+
+    </div>
+
+    <div class="nav-right">
+
+        <a href="profiles.html" class="profile-link">
+
+            <div class="profile-avatar">
+                H
+            </div>
+
+            <span>
+                Hannah
+            </span>
+
+        </a>
+
+    </div>
+
+</nav>
+
+<!-- ================= SERIES HERO ================= -->
+
+<section class="series-hero">
+
+    <div class="series-content">
+
+        <div class="series-label">
+            DT STREAM ORIGINAL SERIES
+        </div>
+
+        <h1 class="series-title">
+            Kapfupi Reloaded
+        </h1>
+
+        <div class="series-meta">
+            2026 &nbsp; • &nbsp; Series &nbsp; • &nbsp; 2 Episodes
+        </div>
+
+        <p class="series-description">
+
+            A story of movement, identity and the people
+            searching for something more. Follow kapfupi's journey through the streets of Harares
+            through two powerful episodes.
+
+        </p>
+
+    </div>
+
+</section>
+
+<!-- ================= EPISODES ================= -->
+
+<section class="episodes-section">
+
+    <div class="episodes-header">
+
+        <h2 class="episodes-title">
+            Episodes
+        </h2>
+
+        <span class="season">
+            Season 1
+        </span>
+
+    </div>
+
+
+    <!-- EPISODE 1 -->
+
+    <a
+        href="kapfupi-reloaded-episode-1.html"
+        class="episode"
+    >
+
+        <div class="episode-image">
+
+            <img
+                src="Kapfupi Reloaded.jpg"
+                alt="Kapfupi Reloaded"
+            >
+
+            <div class="episode-play">
+                ▶
+            </div>
+
+        </div>
+
+        <div class="episode-info">
+
+            <div class="episode-number">
+                EPISODE 01
+            </div>
+
+            <h3 class="episode-title">
+                The Beginning
+            </h3>
+
+            <p class="episode-description">
+
+                Every journey begins somewhere. Meet the
+                people and places that shape the story.
+
+            </p>
+
+        </div>
+
+    </a>
+
+
+    <!-- EPISODE 2 -->
+
+    <a
+        href="kapfupi-reloaded-episode-2.html"
+        class="episode"
+    >
+
+        <div class="episode-image">
+
+            <img
+                src="Kapfupi Reloaded Episode 2.jpg"
+                alt="Kapfupi Reloaded Episode 2"
+            >
+
+            <div class="episode-play">
+                ▶
+            </div>
+
+        </div>
+
+        <div class="episode-info">
+
+            <div class="episode-number">
+                EPISODE 02
+            </div>
+
+            <h3 class="episode-title">
+                The Road Ahead
+            </h3>
+
+            <p class="episode-description">
+
+                The journey continues as new challenges
+                force difficult choices.
+
+            </p>
+
+        </div>
+
+    </a>
+
+</section>
+
+<footer>
+
+    © 2026 DT Stream — A Doar Tanar Company
+
+</footer>
+
+</body>
+
+</html>

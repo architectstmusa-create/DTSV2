@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>DT Stream | African Stories. Made for Us.</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+:root {
+    --black: #080808;
+    --gold: #D4AF37;
+    --red: #B5121B;
+    --white: #FFFFFF;
+    --grey: #A5A5A5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Sora', sans-serif;
+    background: var(--black);
+    color: white;
+    overflow-x: hidden;
+}
+
+a {
+    color: inherit;
+}
+
+/* =================================
+   BACKGROUND MOVIE
+================================= */
+
+.background-video {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    z-index: -5;
+
+    opacity: 0.62;
+
+    pointer-events: none;
+}
+
+/* CINEMATIC OVERLAY */
+
+.video-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: -4;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(8,8,8,0.98) 0%,
+            rgba(8,8,8,0.88) 28%,
+            rgba(8,8,8,0.45) 65%,
+            rgba(8,8,8,0.72) 100%
+        ),
+
+        linear-gradient(
+            180deg,
+            rgba(8,8,8,0.45) 0%,
+            transparent 35%,
+            rgba(8,8,8,0.95) 100%
+        );
+}
+
+/* =================================
+   NAVIGATION
+================================= */
+
+nav {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    padding: 28px 7%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    z-index: 20;
+}
+
+.logo img {
+    width: 165px;
+
+    display: block;
+
+    transition: 0.3s;
+}
+
+.logo img:hover {
+    transform: scale(1.04);
+}
+
+.nav-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+.platform-button,
+.nav-button {
+    padding: 12px 22px;
+
+    border-radius: 30px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition: 0.3s;
+}
+
+.platform-button {
+    background: var(--red);
+}
+
+.platform-button:hover {
+    background: var(--gold);
+
+    color: var(--black);
+
+    transform: translateY(-2px);
+}
+
+.nav-button {
+    border: 1px solid rgba(255,255,255,0.35);
+}
+
+.nav-button:hover {
+    background: var(--gold);
+
+    color: var(--black);
+
+    border-color: var(--gold);
+}
+
+/* =================================
+   HERO
+================================= */
+
+.hero {
+    min-height: 100vh;
+
+    padding: 150px 7% 90px;
+
+    display: flex;
+
+    align-items: center;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.hero-content {
+    width: 55%;
+
+    position: relative;
+
+    z-index: 5;
+}
+
+.eyebrow {
+    color: var(--gold);
+
+    font-size: 12px;
+
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 25px;
+
+    font-weight: 800;
+}
+
+h1 {
+    font-size: clamp(55px, 7vw, 105px);
+
+    line-height: 0.94;
+
+    letter-spacing: -6px;
+
+    margin-bottom: 30px;
+
+    font-weight: 800;
+}
+
+h1 span {
+    color: var(--gold);
+}
+
+.hero-text {
+    font-size: 18px;
+
+    line-height: 1.7;
+
+    color: var(--grey);
+
+    max-width: 540px;
+
+    margin-bottom: 38px;
+}
+
+.hero-buttons {
+    display: flex;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+}
+
+.primary-button,
+.secondary-button {
+    padding: 16px 30px;
+
+    border-radius: 4px;
+
+    text-decoration: none;
+
+    font-weight: 800;
+
+    transition: 0.3s;
+}
+
+.primary-button {
+    background: var(--red);
+}
+
+.primary-button:hover {
+    background: var(--gold);
+
+    color: var(--black);
+
+    transform: translateY(-3px);
+}
+
+.secondary-button {
+    border: 1px solid #555;
+
+    background: rgba(0,0,0,0.25);
+}
+
+.secondary-button:hover {
+    border-color: var(--gold);
+
+    color: var(--gold);
+}
+
+/* =================================
+   HERO VISUAL
+================================= */
+
+.hero-visual {
+    position: absolute;
+
+    right: 5%;
+
+    top: 15%;
+
+    width: 43%;
+
+    height: 650px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    pointer-events: none;
+}
+
+.hero-card {
+    position: relative;
+
+    width: 370px;
+
+    height: 520px;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+
+    transform: rotate(7deg);
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0,0,0,0.05),
+            rgba(0,0,0,0.95)
+        ),
+        linear-gradient(
+            145deg,
+            #D4AF37,
+            #6b4d08 45%,
+            #080808
+        );
+
+    box-shadow:
+        -40px 40px 100px rgba(0,0,0,0.8),
+        0 0 80px rgba(181,18,27,0.25);
+
+    border: 1px solid rgba(255,255,255,0.15);
+}
+
+.hero-card::before {
+    content: "DT";
+
+    position: absolute;
+
+    top: 40px;
+
+    right: -10px;
+
+    font-size: 180px;
+
+    font-weight: 800;
+
+    color: rgba(255,255,255,0.08);
+}
+
+.hero-card-content {
+    position: absolute;
+
+    bottom: 35px;
+
+    left: 30px;
+
+    right: 30px;
+}
+
+.hero-card-content small {
+    color: var(--gold);
+
+    text-transform: uppercase;
+
+    letter-spacing: 2px;
+
+    font-size: 10px;
+}
+
+.hero-card-content h3 {
+    font-size: 38px;
+
+    margin: 10px 0;
+
+    line-height: 1;
+}
+
+.hero-card-content p {
+    color: #ccc;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+}
+
+.hero-floating {
+    position: absolute;
+
+    width: 230px;
+
+    padding: 20px;
+
+    background: rgba(20,20,20,0.9);
+
+    border: 1px solid rgba(255,255,255,0.15);
+
+    backdrop-filter: blur(15px);
+
+    border-radius: 6px;
+
+    right: 0;
+
+    bottom: 60px;
+
+    z-index: 5;
+}
+
+.hero-floating span {
+    color: var(--red);
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+.hero-floating h4 {
+    margin-top: 10px;
+
+    font-size: 17px;
+}
+
+.hero-floating p {
+    color: #999;
+
+    font-size: 11px;
+
+    margin-top: 8px;
+
+    line-height: 1.5;
+}
+
+/* =================================
+   STATS
+================================= */
+
+.stats {
+    padding: 35px 7%;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    border-top: 1px solid rgba(255,255,255,0.08);
+
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+
+    background: rgba(13,13,13,0.95);
+}
+
+.stat {
+    padding: 10px 30px;
+
+    border-right: 1px solid rgba(255,255,255,0.1);
+}
+
+.stat:last-child {
+    border-right: none;
+}
+
+.stat h3 {
+    color: var(--gold);
+
+    font-size: 30px;
+}
+
+.stat p {
+    color: #777;
+
+    font-size: 11px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    margin-top: 6px;
+}
+
+/* =================================
+   FEATURED
+================================= */
+
+section {
+    position: relative;
+}
+
+.featured {
+    padding: 120px 7%;
+
+    background: #080808;
+}
+
+.section-label {
+    color: var(--red);
+
+    font-size: 11px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 15px;
+
+    font-weight: 800;
+}
+
+h2 {
+    font-size: clamp(38px, 5vw, 60px);
+
+    margin-bottom: 50px;
+
+    letter-spacing: -3px;
+
+    font-weight: 800;
+}
+
+/* =================================
+   CONTENT RAIL
+================================= */
+
+.content-rail {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 15px;
+}
+
+.content-card {
+    height: 360px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 5px;
+
+    transition: 0.4s;
+
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.content-card:hover {
+    transform: translateY(-8px) scale(1.02);
+
+    border-color: var(--gold);
+}
+
+.content-card:nth-child(1) {
+    background: linear-gradient(145deg, #8e710f, #080808);
+}
+
+.content-card:nth-child(2) {
+    background: linear-gradient(145deg, #8f1018, #080808);
+}
+
+.content-card:nth-child(3) {
+    background: linear-gradient(145deg, #313131, #080808);
+}
+
+.content-card:nth-child(4) {
+    background: linear-gradient(145deg, #4d2b19, #080808);
+}
+
+.content-card::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            transparent 30%,
+            rgba(255,255,255,0.08)
+        );
+
+    opacity: 0.5;
+}
+
+.card-number {
+    position: absolute;
+
+    top: 15px;
+
+    right: 20px;
+
+    font-size: 100px;
+
+    font-weight: 800;
+
+    color: rgba(255,255,255,0.08);
+}
+
+.card-content {
+    position: absolute;
+
+    bottom: 0;
+
+    padding: 25px;
+
+    width: 100%;
+
+    background: linear-gradient(
+        transparent,
+        rgba(0,0,0,0.98)
+    );
+}
+
+.card-content h3 {
+    font-size: 25px;
+
+    margin-bottom: 8px;
+}
+
+.card-content p {
+    color: #aaa;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+}
+
+/* =================================
+   CREATOR SECTION
+================================= */
+
+.creator-section {
+    padding: 120px 7%;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 80px;
+
+    background: #111;
+}
+
+.creator-section h2 {
+    margin-bottom: 25px;
+}
+
+.creator-text {
+    color: var(--grey);
+
+    line-height: 1.8;
+
+    font-size: 16px;
+}
+
+.creator-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+.creator-item {
+    padding: 22px;
+
+    border: 1px solid rgba(255,255,255,0.1);
+
+    background: #080808;
+
+    transition: 0.3s;
+}
+
+.creator-item:hover {
+    border-color: var(--gold);
+
+    transform: translateX(8px);
+}
+
+.creator-item strong {
+    font-size: 16px;
+}
+
+.creator-item p {
+    color: #777;
+
+    font-size: 12px;
+
+    margin-top: 7px;
+}
+
+/* =================================
+   MISSION
+================================= */
+
+.mission {
+    padding: 140px 7%;
+
+    text-align: center;
+
+    background: #080808;
+}
+
+.mission h2 {
+    max-width: 900px;
+
+    margin: auto;
+
+    line-height: 1.05;
+}
+
+.mission h2 span {
+    color: var(--red);
+}
+
+.mission p {
+    max-width: 600px;
+
+    margin: 30px auto 0;
+
+    color: var(--grey);
+
+    line-height: 1.7;
+}
+
+/* =================================
+   SIGNUP
+================================= */
+
+.signup {
+    padding: 110px 7%;
+
+    text-align: center;
+
+    background: var(--gold);
+
+    color: var(--black);
+}
+
+.signup h2 {
+    margin-bottom: 15px;
+}
+
+.signup p {
+    margin-bottom: 30px;
+
+    font-size: 17px;
+
+    font-weight: 600;
+}
+
+.signup-form {
+    display: flex;
+
+    max-width: 500px;
+
+    margin: auto;
+
+    gap: 10px;
+}
+
+.signup-form input {
+    flex: 1;
+
+    padding: 16px;
+
+    border: none;
+
+    border-radius: 4px;
+
+    font-size: 15px;
+
+    font-family: 'Sora', sans-serif;
+}
+
+.signup-form button {
+    padding: 16px 25px;
+
+    background: var(--red);
+
+    color: white;
+
+    border: none;
+
+    border-radius: 4px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    font-family: 'Sora', sans-serif;
+
+    transition: 0.3s;
+}
+
+.signup-form button:hover {
+    background: #8f1018;
+}
+
+/* =================================
+   FOOTER
+================================= */
+
+footer {
+    padding: 30px 7%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    color: #666;
+
+    font-size: 13px;
+
+    background: #080808;
+}
+
+/* =================================
+   MOBILE
+================================= */
+
+@media (max-width: 900px) {
+
+    .hero-content {
+        width: 100%;
+    }
+
+    .hero-visual {
+        opacity: 0.25;
+
+        width: 100%;
+
+        right: -20%;
+    }
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 25px;
+    }
+
+    .stat {
+        border-right: none;
+    }
+
+    .content-rail {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .creator-section {
+        grid-template-columns: 1fr;
+
+        gap: 50px;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    nav {
+        padding: 20px 5%;
+    }
+
+    .logo img {
+        width: 125px;
+    }
+
+    .nav-button {
+        display: none;
+    }
+
+    .platform-button {
+        padding: 10px 15px;
+
+        font-size: 11px;
+    }
+
+    .hero {
+        padding: 150px 7% 80px;
+    }
+
+    h1 {
+        letter-spacing: -4px;
+    }
+
+    .hero-visual {
+        display: none;
+    }
+
+    .stats {
+        grid-template-columns: 1fr 1fr;
+
+        padding: 30px 5%;
+    }
+
+    .featured,
+    .creator-section,
+    .mission {
+        padding: 90px 7%;
+    }
+
+    .content-rail {
+        grid-template-columns: 1fr;
+    }
+
+    .signup-form {
+        flex-direction: column;
+    }
+
+    footer {
+        flex-direction: column;
+
+        gap: 10px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- BACKGROUND MOVIE -->
+
+<video
+    class="background-video"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="auto"
+>
+
+    <source
+        src="The Minos Paradox (2025).mp4"
+        type="video/mp4"
+    >
+
+</video>
+
+<div class="video-overlay"></div>
+
+
+<!-- NAVIGATION -->
+
+<nav>
+
+    <a href="intro.html" class="logo">
+
+        <img
+            src="DT Streamdud.png"
+            alt="DT Stream Logo"
+        >
+
+    </a>
+
+    <div class="nav-actions">
+
+        <a href="profiles.html" class="platform-button">
+    Enter DT Stream
+</a>
+
+        <a
+            href="#signup"
+            class="nav-button"
+        >
+            Join the movement
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="eyebrow">
+            A Doar Tanar Company
+        </div>
+
+        <h1>
+            African stories.<br>
+            <span>Made for us.</span>
+        </h1>
+
+        <p class="hero-text">
+
+            DT Stream is building the next generation of African entertainment.
+
+            Local stories. Bold creators. A new era of streaming.
+
+        </p>
+
+        <div class="hero-buttons">
+
+            <a
+                href="#signup"
+                class="primary-button"
+            >
+                Get early access
+            </a>
+
+            <a
+                href="#featured"
+                class="secondary-button"
+            >
+                Explore the vision
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="hero-visual">
+
+        <div class="hero-card">
+
+            <div class="hero-card-content">
+
+                <small>
+                    DT Stream Original
+                </small>
+
+                <h3>
+                    Stories<br>
+                    from home.
+                </h3>
+
+                <p>
+                    The next generation of African entertainment starts here.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="hero-floating">
+
+            <span>
+                Coming soon
+            </span>
+
+            <h4>
+                More stories. More voices.
+            </h4>
+
+            <p>
+                A streaming platform built around the people and stories of Africa.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- STATS -->
+
+<section class="stats">
+
+    <div class="stat">
+
+        <h3>
+            54+
+        </h3>
+
+        <p>
+            African countries
+        </p>
+
+    </div>
+
+
+    <div class="stat">
+
+        <h3>
+            1B+
+        </h3>
+
+        <p>
+            Stories waiting
+        </p>
+
+    </div>
+
+
+    <div class="stat">
+
+        <h3>
+            ∞
+        </h3>
+
+        <p>
+            Creative voices
+        </p>
+
+    </div>
+
+
+    <div class="stat">
+
+        <h3>
+            01
+        </h3>
+
+        <p>
+            New platform
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- FEATURED -->
+
+<section
+    class="featured"
+    id="featured"
+>
+
+    <div class="section-label">
+
+        The future of African entertainment
+
+    </div>
+
+    <h2>
+
+        Stories that feel like home.
+
+    </h2>
+
+
+    <div class="content-rail">
+
+        <div class="content-card">
+
+            <div class="card-number">
+                01
+            </div>
+
+            <div class="card-content">
+
+                <h3>
+                    Originals
+                </h3>
+
+                <p>
+                    Bold stories from the continent.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="content-card">
+
+            <div class="card-number">
+                02
+            </div>
+
+            <div class="card-content">
+
+                <h3>
+                    Reality
+                </h3>
+
+                <p>
+                    Real people. Real drama. No filter.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="content-card">
+
+            <div class="card-number">
+                03
+            </div>
+
+            <div class="card-content">
+
+                <h3>
+                    Local
+                </h3>
+
+                <p>
+                    Made in Africa. Watched everywhere.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="content-card">
+
+            <div class="card-number">
+                04
+            </div>
+
+            <div class="card-content">
+
+                <h3>
+                    Culture
+                </h3>
+
+                <p>
+                    The stories that shape who we are.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CREATORS -->
+
+<section class="creator-section">
+
+    <div>
+
+        <div class="section-label">
+
+            Built for the next generation
+
+        </div>
+
+        <h2>
+
+            The stage is yours.
+
+        </h2>
+
+        <p class="creator-text">
+
+            DT Stream is not just about watching.
+
+            It is about creating, discovering and giving African voices
+            the audience they deserve.
+
+        </p>
+
+    </div>
+
+
+    <div class="creator-list">
+
+        <div class="creator-item">
+
+            <strong>
+                For creators
+            </strong>
+
+            <p>
+                A bigger stage for bold African ideas.
+            </p>
+
+        </div>
+
+
+        <div class="creator-item">
+
+            <strong>
+                For audiences
+            </strong>
+
+            <p>
+                Stories that feel closer to home.
+            </p>
+
+        </div>
+
+
+        <div class="creator-item">
+
+            <strong>
+                For Africa
+            </strong>
+
+            <p>
+                A new era of African entertainment.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- MISSION -->
+
+<section class="mission">
+
+    <div class="section-label">
+
+        Our vision
+
+    </div>
+
+    <h2>
+
+        Africa should not only
+
+        <span>
+            consume
+        </span>
+
+        culture.
+
+        We should create it.
+
+    </h2>
+
+    <p>
+
+        DT Stream exists to give African creators a bigger stage
+        and audiences stories that actually feel like theirs.
+
+    </p>
+
+</section>
+
+
+<!-- SIGNUP -->
+
+<section
+    class="signup"
+    id="signup"
+>
+
+    <h2>
+
+        Be there from day one.
+
+    </h2>
+
+    <p>
+
+        Join the DT Stream early access list.
+
+    </p>
+
+
+    <form
+        class="signup-form"
+        onsubmit="joinWaitlist(event)"
+    >
+
+        <input
+            type="email"
+            placeholder="Enter your email"
+            required
+        >
+
+        <button
+            type="submit"
+        >
+
+            Join DT Stream
+
+        </button>
+
+    </form>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div>
+        © 2026 DT Stream
+    </div>
+
+    <div>
+        A Doar Tanar Company
+    </div>
+
+</footer>
+
+
+<script>
+
+/* FORCE BACKGROUND VIDEO TO AUTOPLAY */
+
+const backgroundVideo = document.querySelector(".background-video");
+
+window.addEventListener("load", () => {
+
+    backgroundVideo.play().catch(() => {
+
+        console.log("Autoplay was blocked by the browser.");
+
+    });
+
+});
+
+
+/* WAITLIST */
+
+function joinWaitlist(event) {
+
+    event.preventDefault();
+
+    alert("You're on the DT Stream early access list!");
+
+}
+
+</script>
+
+</body>
+
+</html>
